@@ -18,8 +18,11 @@
  */
 function checkValueEmpty($value=array(),$param=array()){
     foreach ($value as $key) {
+        if (!isset($param[$key])){
+            return array('data'=>'','code'=>config('codeMsg')['PARAM_LACK_CODE'],'message'=>config('codeMsg')['PARAM_LACK_MSG'].$key);
+        }
         if (empty($param[$key])){
-            return array('data'=>'','code'=>'6310002','message'=>'参数为空'.$key);
+            return array('data'=>'','code'=>config('codeMsg')['PARAM_NULL_CODE'],'message'=>config('codeMsg')['PARAM_NULL_MSG'].$key);
         }
     }
     return array('data'=>'','code'=>1,'message'=>'');
